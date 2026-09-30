@@ -1,0 +1,15 @@
+{
+  "$schema": "https://raw.githubusercontent.com/googleapis/release-please/main/schemas/config.json",
+  "separate-pull-requests": true,
+  "include-component-in-tag": true,
+  "packages": {
+    "modules/greeting": {
+      "release-type": "terraform-module",
+      "component": "greeting"
+    },
+    "modules/naming": {
+      "release-type": "terraform-module",
+      "component": "naming"
+    }
+  }
+}
