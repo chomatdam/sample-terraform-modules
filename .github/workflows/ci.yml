@@ -1,0 +1,43 @@
+name: ci
+
+on:
+  pull_request:
+  push:
+    branches: [main]
+
+permissions:
+  contents: read
+
+jobs:
+  modules:
+    runs-on: ubuntu-latest
+    strategy:
+      fail-fast: false
+      matrix:
+        terraform_version: ["1.6.0", "latest"]
+    steps:
+      - uses: actions/checkout@v7
+
+      - uses: hashicorp/setup-terraform@v4
+        with:
+          terraform_version: ${{ matrix.terraform_version }}
+
+      - name: versions.tf has no version marker
+        run: |
+          if grep -En 'v[0-9]+\.[0-9]+\.[0-9]+' modules/*/versions.tf; then
+            echo "release-please rewrites vX.Y.Z strings in versions.tf"
+            exit 1
+          fi
+
+      - name: Check each module
+        run: |
+          for dir in modules/*/; do
+            echo "::group::$dir"
+            terraform -chdir="$dir" fmt -check -recursive
+            terraform -chdir="$dir" init -backend=false
+            terraform -chdir="$dir" validate
+            terraform -chdir="$dir" test
+            terraform -chdir="${dir}examples/basic" init -backend=false
+            terraform -chdir="${dir}examples/basic" validate
+            echo "::endgroup::"
+          done
