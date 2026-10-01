@@ -4,20 +4,6 @@
   "packageRules": [
     {
       "matchManagers": ["terraform"],
-      "matchCurrentValue": "/^greeting-v/",
-      "versionCompatibility": "^greeting-v(?<version>.+)$",
-      "additionalBranchPrefix": "greeting-",
-      "commitMessageTopic": "greeting module"
-    },
-    {
-      "matchManagers": ["terraform"],
-      "matchCurrentValue": "/^naming-v/",
-      "versionCompatibility": "^naming-v(?<version>.+)$",
-      "additionalBranchPrefix": "naming-",
-      "commitMessageTopic": "naming module"
-    },
-    {
-      "matchManagers": ["terraform"],
       "matchDepTypes": ["required_version"],
       "enabled": false
     }

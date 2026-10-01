@@ -8,7 +8,6 @@ A sandbox for testing release-please and Renovate with two dummy Terraform modul
 |--------------------|-------------------------------------------------------------------|
 | `modules/greeting` | Builds a greeting message.                                        |
 | `modules/naming`   | Builds a lowercase resource name.                                 |
-| `consumers/basic`  | Pins both modules by git tag so Renovate has something to update. |
 
 Each module has the standard module structure, an example in `examples/basic` and a `terraform test` file.
 
@@ -39,10 +38,11 @@ appears.
 
 ## Consumer updates
 
-`consumers/basic` pins each module with a git source, for example
-`git::https://github.com/chomatdam/sample-terraform-modules.git//modules/greeting?ref=greeting-v0.1.0`. `renovate.json`
-reads the `greeting-v` and `naming-v` prefixes so Renovate can compare the tags. Install the Mend Renovate GitHub App on
-the repo to see it open update PRs.
+[sample-terraform-modules-consumer](https://github.com/chomatdam/sample-terraform-modules-consumer) pins each module with
+a git source, for example
+`git::ssh://git@github.com/chomatdam/sample-terraform-modules.git//modules/greeting?ref=greeting-v0.1.0`. Its
+`renovate.json` reads the `greeting-v` and `naming-v` prefixes so Renovate can compare the tags. Install the Mend
+Renovate GitHub App on both repos to see it open update PRs.
 
 ## Publishing one module to the registry
 
