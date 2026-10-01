@@ -9,7 +9,7 @@ variable "name" {
 }
 
 variable "prefix" {
-  description = "Word that starts the greeting."
+  description = "Word that starts the greeting, such as Hello."
   type        = string
   default     = "Hello"
 }
