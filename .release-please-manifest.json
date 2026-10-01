@@ -1,4 +1,4 @@
 {
-  "modules/greeting": "0.0.0",
+  "modules/greeting": "0.1.0",
   "modules/naming": "0.0.0"
 }
